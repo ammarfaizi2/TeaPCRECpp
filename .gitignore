@@ -1,0 +1,5 @@
+*.o
+*.swo
+*.swp
+*.lock
+/bin
