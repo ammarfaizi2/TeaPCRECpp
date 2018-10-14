@@ -15,9 +15,9 @@ void TeaPCRE::setPattern(const char *pattern, int option) {
 	this->pattern = pattern;
 }
 
-void TeaPCRE::findAll(int rcOffset, char *result[], int *matchCount, unsigned int limit) {
+void TeaPCRE::findAll(int rcOffset, char *result[], unsigned int *matchCount, unsigned int limit) {
 	
-    int erroffset, rc, i, ovector[100], j = 0;
+    int erroffset, rc, ovector[100], j = 0;
     size_t subjectLength = strlen(this->subject);
 
 	char *str = (char*)malloc(subjectLength * sizeof(char*));
@@ -32,7 +32,7 @@ void TeaPCRE::findAll(int rcOffset, char *result[], int *matchCount, unsigned in
     *matchCount = 0;
 	while (offset < len && (rc = pcre_exec(re, 0, str, len, offset, 0, ovector, sizeof(ovector))) >= 0)
 	{
-		for(i = 0; i < rc; ++i){
+		for(int i = 0; i < rc; ++i){
 			if (i == rcOffset) {
 				if ((*matchCount) == limit) {
 					return;
@@ -40,7 +40,7 @@ void TeaPCRE::findAll(int rcOffset, char *result[], int *matchCount, unsigned in
 				char *tmp = str + ovector[2*i];
 				result[j] = (char*)malloc(strlen(tmp) * sizeof(char*));
 				sprintf(result[j++], "%.*s", ovector[2*i+1] - ovector[2*i], tmp);
-				*matchCount = (*matchCount) + 1;
+				*matchCount = (*matchCount) + 1u;
 			}
 		}
 		offset = ovector[1];

@@ -10,10 +10,11 @@ int main(int argc, char const *argv[])
 	tre.setSubject("asd123qwe345p12g031230ei1e2ee000aaa919");
 	tre.setPattern("(?:\\D|^)(\\d{3})(?:\\D|$)");
 
-	int matchCount;
+	unsigned int matchCount, i;
+
 	tre.findAll(1, result, &matchCount, 4u);
 
-	for (int i = 0; i < matchCount; ++i)
+	for (i = 0; i < matchCount; ++i)
 	{
 		printf("%s\n", result[i]);
 	}
